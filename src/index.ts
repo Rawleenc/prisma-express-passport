@@ -2,6 +2,7 @@ import { PrismaClient } from '@prisma/client';
 import 'dotenv/config';
 import express from 'express';
 import { sanitizedUser } from './models/user';
+import startRoute from './routes';
 import postRoute from './routes/post';
 import userRoute from './routes/user';
 
@@ -12,6 +13,7 @@ const app = express();
 // Set express to use url encoded extended property. TLDR allows nested objects. & the responses to only be parsed as JSON
 app.use(express.urlencoded({ extended: true }), express.json());
 
+app.use('', startRoute);
 app.use('/users', userRoute);
 app.use('/posts', postRoute);
 
