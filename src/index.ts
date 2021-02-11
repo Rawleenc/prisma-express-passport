@@ -11,22 +11,26 @@ const app = express();
 app.use(express.urlencoded({ extended: true }), express.json());
 
 app.use('/posts', async (_req, res) => {
-  res.json(await prisma.post.findMany());
+  // imitate sanitizedPost by only selecting the displayName from the author on the post.
+  const posts = await prisma.post.findMany({
+    include: { author: { select: { displayName: true } } },
+  });
+
+  res.json(posts);
 });
 
 app.use('/users', async (_req, res) => {
-  const users = await prisma.user.findMany();
-  const sanitizedUsers: sanitizedUser[] = [];
-  users.forEach(user => {
-    sanitizedUsers.push({
-      email: user.email,
-      displayName: user.displayName,
-      createdAt: user.createdAt,
-      updatedAt: user.updatedAt,
-    });
+  const users: sanitizedUser[] = await prisma.user.findMany({
+    select: {
+      email: true,
+      displayName: true,
+      createdAt: true,
+      updatedAt: true,
+      posts: { select: { title: true } },
+    },
   });
 
-  return res.json(sanitizedUsers);
+  return res.json(users);
 });
 
 const server = app.listen(process.env.PORT, () => {
