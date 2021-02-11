@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "CommonJS",
+    "lib": ["ESNext.AsyncIterable", "ESNext", "DOM"],
+    "types": ["node"],
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "baseUrl": "./src",
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "esModuleInterop": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": false,
+    "sourceMap": false,
+    "removeComments": true,
+    "declaration": true,
+    "resolveJsonModule": true,
+    "allowUnreachableCode": false,
+    "alwaysStrict": true
+  },
+  "exclude": ["node_modules", "dist"],
+  "include": ["src/**/*", "src/**/*.json", "prisma/seed.ts"]
+}
