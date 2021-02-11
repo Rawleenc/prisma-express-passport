@@ -1,0 +1,47 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+//POSTGRES | When enabling postgres, be sure to add the DATABASE_URL to a .env file at the root directory.
+// datasource db {
+//   provider = "postgresql"
+//   url      = env("DATABASE_URL")
+// }
+
+//SQLITE
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Post {
+  id            Int       @id @default(autoincrement())
+  userId        Int
+  author        User      @relation(fields: [userId], references: [id])
+  title         String  
+  content       String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt 
+  published     Boolean   @default(false)
+}
+
+model User {
+  id            Int       @id @default(autoincrement())
+  email         String    @unique
+  password      String
+  displayName   String?
+  posts         Post[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt 
+  admin         Boolean   @default(false)  // Switch admin with role when using PSQL
+  // role          Role      @default(USER) // Switch role with admin when using SQLITE
+}
+
+//Enums not working for SQLITE, Enable when using PSQL
+// enum Role {
+//   USER
+//   ADMIN
+// }
