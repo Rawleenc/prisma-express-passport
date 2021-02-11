@@ -1,10 +1,10 @@
-import { Post, sanitizedPost } from './post';
+import { Post, postTitle } from './post';
 
 export class User {
   id: number;
   email: string;
   displayName: string | null;
-  posts: Post[] | sanitizedPost[] | null;
+  posts: Post[] | postTitle[] | null;
   createdAt: Date;
   updatedAt: Date;
   admin: boolean;

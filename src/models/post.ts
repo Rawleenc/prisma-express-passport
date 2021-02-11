@@ -10,4 +10,4 @@ export class Post {
   updatedAt: Date;
 }
 
-export type sanitizedPost = Pick<Post, 'title'>;
+export type postTitle = Pick<Post, 'title'>;
