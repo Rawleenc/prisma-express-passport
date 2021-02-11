@@ -2,9 +2,9 @@ import 'dotenv/config';
 import express from 'express';
 import session from 'express-session';
 import passport from 'passport';
+import startRoute from './routes';
 import postRoute from './routes/post';
 import userRoute from './routes/user';
-import { isLoggedIn } from './utils/passport';
 
 const app = express();
 
@@ -18,31 +18,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Routes
-// app.use('', startRoute); removed because EJS was added
+app.use('', startRoute);
 app.use('/users', userRoute);
 app.use('/posts', postRoute);
-
-app.get('/', (req, res) => {
-  res.render('home', { user: req.user });
-});
-
-app.get('/home', (req, res) => {
-  res.render('home', { user: req.user });
-});
-app.get('/login', (_req, res) => {
-  res.render('login');
-});
-
-app.post('/login', passport.authenticate('local', { failureRedirect: '/login', successRedirect: '/profile' }));
-
-app.get('/logout', (req, res) => {
-  req.logout();
-  res.redirect('/');
-});
-
-app.get('/profile', isLoggedIn, (req, res) => {
-  res.render('profile', { user: req.user });
-});
 
 const server = app.listen(process.env.PORT, () => {
   console.log('Server ready & listening to http://localhost:' + process.env.PORT);

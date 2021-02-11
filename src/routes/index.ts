@@ -1,15 +1,30 @@
 import { Router } from 'express';
+import passport from 'passport';
+import { isLoggedIn } from './../utils/passport';
 
 const startRoute = Router();
 
-startRoute.get('/', async (_req, res) => {
-  return res.json({
-    0: 'Hello and welcome.',
-    1: 'This API is built up of the following: Users and Posts .',
-    2: 'You can query users on /users and posts on /posts .',
-    3: 'You can also get posts belonging to a user by using /users/[id]/posts .',
-    4: 'Enjoy and have fun!',
-  });
+startRoute.get('', (req, res) => {
+  res.render('home', { user: req.user });
+});
+
+startRoute.get('/home', (req, res) => {
+  res.render('home', { user: req.user });
+});
+
+startRoute.get('/login', (_req, res) => {
+  res.render('login');
+});
+
+startRoute.post('/login', passport.authenticate('local', { failureRedirect: '/login', successRedirect: '/profile' }));
+
+startRoute.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
+});
+
+startRoute.get('/profile', isLoggedIn, (req, res) => {
+  res.render('profile', { user: req.user });
 });
 
 export default startRoute;
