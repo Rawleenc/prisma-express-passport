@@ -2,6 +2,8 @@ import { PrismaClient } from '@prisma/client';
 import 'dotenv/config';
 import express from 'express';
 import { sanitizedUser } from './models/user';
+import postRoute from './routes/post';
+import userRoute from './routes/user';
 
 const prisma = new PrismaClient();
 
@@ -10,14 +12,8 @@ const app = express();
 // Set express to use url encoded extended property. TLDR allows nested objects. & the responses to only be parsed as JSON
 app.use(express.urlencoded({ extended: true }), express.json());
 
-app.use('/posts', async (_req, res) => {
-  // imitate sanitizedPost by only selecting the displayName from the author on the post.
-  const posts = await prisma.post.findMany({
-    include: { author: { select: { displayName: true } } },
-  });
-
-  res.json(posts);
-});
+app.use('/users', userRoute);
+app.use('/posts', postRoute);
 
 app.use('/users', async (_req, res) => {
   const users: sanitizedUser[] = await prisma.user.findMany({
