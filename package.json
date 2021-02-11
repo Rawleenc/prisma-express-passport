@@ -16,5 +16,27 @@
   "bugs": {
     "url": "https://github.com/dankphetamine/prisma-express-passport/issues"
   },
-  "homepage": "https://github.com/dankphetamine/prisma-express-passport#readme"
+  "homepage": "https://github.com/dankphetamine/prisma-express-passport#readme",
+  "dependencies": {
+    "@prisma/client": "^2.16.1",
+    "argon2": "^0.27.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "joi": "^17.4.0",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.11",
+    "@types/node": "^14.14.25",
+    "@types/passport": "^1.0.6",
+    "@types/passport-local": "^1.0.33",
+    "prettier": "^2.2.1",
+    "prisma": "^2.16.1",
+    "ts-node": "^9.1.1",
+    "ts-node-dev": "^1.1.1",
+    "typescript": "^4.1.5"
+  }
 }
