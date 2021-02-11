@@ -4,6 +4,11 @@
   "description": "A simple RESTful API, utilizing Express with Prisma",
   "main": "index.js",
   "scripts": {
+    "format:check": "prettier --check ./**/*.{js,json,ts}",
+    "format:lint": "prettier --write ./**/*.{js,json,ts}",
+    "seed": "prisma db seed --preview-feature",
+    "migrate:": "prisma migrate dev --preview-feature",
+    "dev": "ts-node-dev src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
