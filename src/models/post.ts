@@ -9,3 +9,5 @@ export class Post {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export type sanitizedPost = Pick<Post, 'title'>;

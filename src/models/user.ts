@@ -1,13 +1,13 @@
-import { Post } from './post';
+import { Post, sanitizedPost } from './post';
 
 export class User {
   id: number;
   email: string;
-  displayName?: string | null;
-  posts?: Post[] | null;
+  displayName: string | null;
+  posts: Post[] | sanitizedPost[] | null;
   createdAt: Date;
   updatedAt: Date;
   admin: boolean;
 }
 
-export type sanitizedUser = Omit<User, 'id' | 'password' | 'admin' | 'posts'>;
+export type sanitizedUser = Omit<User, 'id' | 'password' | 'admin'>;
