@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createDb } from '../utils/context';
+import { createDb } from '../utils/db';
 const postRoute = Router();
 const db = createDb();
 

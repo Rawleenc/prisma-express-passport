@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createDb } from '../utils/context';
+import { createDb } from '../utils/db';
 import { sanitizedUser } from './../models/user';
 
 const userRoute = Router();
