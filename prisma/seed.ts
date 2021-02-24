@@ -1,8 +1,9 @@
 import { PrismaClient } from '@prisma/client';
 import argon2id from 'argon2';
+import 'dotenv/config';
 
 const prisma = new PrismaClient();
-const basePassword = '12345';
+const basePassword = process.env.BASE_PASSWORD!;
 
 async function main() {
   const a = await prisma.user.upsert({
