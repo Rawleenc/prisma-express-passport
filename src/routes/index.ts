@@ -1,10 +1,10 @@
 import argon2id from 'argon2';
 import { Router } from 'express';
 import passport from 'passport';
-import { createDb } from '../utils/db';
+import prisma from '../utils/db';
 import { isLoggedIn } from './../utils/passport';
 
-const db = createDb();
+const db = prisma;
 const startRoute = Router();
 
 startRoute.get('', (req, res) => {
@@ -15,6 +15,7 @@ startRoute.get('/home', (req, res) => {
   res.render('home', { user: req.user });
 });
 
+//#region Authentication
 startRoute.get('/login', (_req, res) => {
   res.render('login');
 });
@@ -48,5 +49,6 @@ startRoute.post('/register', async (req, res) => {
     })
     .catch(() => res.status(400).json('Unable to add user'));
 });
+//#endregion
 
 export default startRoute;

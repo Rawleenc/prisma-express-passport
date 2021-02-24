@@ -3,9 +3,9 @@ import { NextFunction, Request, Response } from 'express';
 import passport from 'passport';
 import { Strategy } from 'passport-local';
 import { User } from '../models/user';
-import { createDb } from './db';
+import prisma from './db';
 
-const db = createDb();
+const db = prisma;
 const response = 'Invalid login credentials';
 
 passport.use(
@@ -40,5 +40,7 @@ passport.deserializeUser(async (id: string | number, done) => {
 export const isLoggedIn = (req: Request, res: Response, next: NextFunction) => {
   if (req.isAuthenticated()) return next();
 
+  // Consider showing either an error, or simply redirect the user to log in page
+  // res.status(401).json('You must be logged in to do this.');
   res.redirect('/login');
 };

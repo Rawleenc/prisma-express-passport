@@ -5,6 +5,4 @@ const prisma = new PrismaClient({
   errorFormat: 'minimal',
 });
 
-export function createDb() {
-  return prisma;
-}
+export default prisma;

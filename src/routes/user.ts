@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { createDb } from '../utils/db';
+import prisma from '../utils/db';
 import { sanitizedUser } from './../models/user';
 
 const userRoute = Router();
-const db = createDb();
+const db = prisma;
 
 userRoute.get('/', async (_req, res) => {
   const users: sanitizedUser[] = await db.user.findMany({
