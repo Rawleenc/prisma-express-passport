@@ -1,7 +1,9 @@
 import { Router } from 'express';
-import { createDb } from '../utils/db';
+import prisma from '../utils/db';
+import { User } from './../models/user';
+import { isLoggedIn } from './../utils/passport';
 const postRoute = Router();
-const db = createDb();
+const db = prisma;
 
 postRoute.get('/', async (_req, res) => {
   // imitate sanitizedPost by only selecting the displayName from the author on the post.
@@ -24,6 +26,19 @@ postRoute.get('/:id', async (req, res) => {
   });
 
   res.json(posts);
+});
+
+postRoute.post('/', isLoggedIn, async (req, res) => {
+  db.post
+    .create({
+      data: {
+        title: req.body.title,
+        content: req.body.content,
+        author: { connect: { id: (req.user as User).id } },
+      },
+    })
+    .then(post => res.status(200).json(post))
+    .catch(_err => res.status(400).json('Unable to create post'));
 });
 
 export default postRoute;
