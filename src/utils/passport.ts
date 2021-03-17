@@ -6,11 +6,11 @@ import { User } from '../models/user';
 import prisma from './db';
 
 const db = prisma;
-const response = 'Invalid login credentials';
 
 passport.use(
   new Strategy({ usernameField: 'email' }, async (email, password, done) => {
     const user = await db.user.findUnique({ where: { email } });
+    const response = 'Invalid login credentials';
 
     if (!user) return done(response);
     else if (user) {
