@@ -7,7 +7,18 @@ const postRoute = Router();
 const db = prisma;
 
 //#region CREATE
-
+postRoute.post('/', isLoggedIn, async (req, res) => {
+  db.post
+    .create({
+      data: {
+        title: req.body.title,
+        content: req.body.content,
+        author: { connect: { id: (req.user as User).id } },
+      },
+    })
+    .then(post => res.status(200).json(post))
+    .catch(_err => res.status(400).json('Unable to create post'));
+});
 //#endregion
 
 //#region READ
