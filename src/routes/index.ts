@@ -1,12 +1,14 @@
 import argon2id from 'argon2';
 import { Router } from 'express';
 import passport from 'passport';
+import { registerSchema } from '../models/joi';
 import prisma from '../utils/db';
-import { isLoggedIn } from './../utils/passport';
+import { isLoggedIn } from '../utils/passport';
 
 const db = prisma;
 const startRoute = Router();
 
+//#region Views (render)
 startRoute.get('', (req, res) => {
   res.render('home', { user: req.user });
 });
@@ -24,6 +26,13 @@ startRoute.get('/register', (_req, res) => {
   res.render('register');
 });
 
+startRoute.get('/profile', isLoggedIn, (req, res) => {
+  res.render('profile', { user: req.user });
+});
+//#endregion
+
+//#endregion
+
 startRoute.post('/login', passport.authenticate('local', { failureRedirect: '/login', successRedirect: '/profile' }));
 
 startRoute.get('/logout', (req, res) => {
@@ -31,11 +40,16 @@ startRoute.get('/logout', (req, res) => {
   res.redirect('/');
 });
 
-startRoute.get('/profile', isLoggedIn, (req, res) => {
-  res.render('profile', { user: req.user });
-});
+//#region CREATE (user)
 
+/**
+ * Registers a user with an  email, password and display name
+ */
 startRoute.post('/register', async (req, res) => {
+  const { error } = registerSchema.validate(req.body);
+
+  if (error) return res.status(400).json({ error: error.details[0] });
+
   await db.user
     .create({
       data: {
