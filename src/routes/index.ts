@@ -17,6 +17,10 @@ startRoute.get('/home', (req, res) => {
   res.render('home', { user: req.user });
 });
 
+startRoute.get('/create-post', (req, res) => {
+  res.render('create-post', { user: req.user });
+});
+
 //#region Authentication
 startRoute.get('/login', (_req, res) => {
   res.render('login');
@@ -40,7 +44,7 @@ startRoute.get('/logout', (req, res) => {
   res.redirect('/');
 });
 
-//#region CREATE (user)
+//#region CREATE
 
 /**
  * Registers a user with an  email, password and display name
