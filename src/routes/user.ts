@@ -2,7 +2,7 @@ import argon2id from 'argon2';
 import { Router } from 'express';
 import prisma from '../utils/db';
 import { isLoggedIn } from '../utils/passport';
-import { updateUserSchema } from './../models/joi';
+import { userSchema } from './../models/joi';
 import { sanitizedUser } from './../models/user';
 
 const userRoute = Router();
@@ -84,7 +84,7 @@ userRoute.get('/:id/posts', async (req, res) => {
 userRoute.put('/:id', isLoggedIn, async (req, res) => {
   const { id } = req.params;
 
-  const { error } = updateUserSchema.validate(req.body);
+  const { error } = userSchema.validate(req.body);
   if (error) return res.status(400).json({ error: error.details[0] });
 
   const user = await db.user.findUnique({ where: { id: parseInt(id) } });
