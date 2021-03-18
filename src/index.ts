@@ -2,10 +2,11 @@ import 'dotenv/config';
 import express from 'express';
 import session from 'express-session';
 import passport from 'passport';
+import swaggerUi from 'swagger-ui-express';
 import startRoute from './routes';
 import postRoute from './routes/post';
 import userRoute from './routes/user';
-
+import * as swaggerDef from './utils/swagger.json';
 const app = express();
 
 app.set('views', __dirname + '/views');
@@ -17,10 +18,13 @@ app.use(session({ secret: process.env.SECRET!, resave: false, saveUninitialized:
 app.use(passport.initialize());
 app.use(passport.session());
 
-//Routes
+// Routes
 app.use('', startRoute);
 app.use('/users', userRoute);
 app.use('/posts', postRoute);
+
+// Swagger
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDef, { explorer: true }));
 
 const server = app.listen(process.env.PORT, () => {
   console.log('Server ready & listening to http://localhost:' + process.env.PORT);
