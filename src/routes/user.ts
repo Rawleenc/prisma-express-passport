@@ -79,6 +79,32 @@ userRoute.get('/:id/posts', async (req, res) => {
 //#region UPDATE
 
 /**
+ * Deletes a user, only works if logged in and user is themself
+ * Also deletes all the posts, if cascade delete doesn't.
+ */
+userRoute.delete('/:id', isLoggedIn, async (req, res) => {
+  const { id } = req.params;
+
+  const user = await db.user.findUnique({ where: { id: parseInt(id) } });
+  if (!user) return res.status(404).json('Unable to find user');
+
+  const { email } = req.user as sanitizedUser;
+
+  if (user.email !== email) return res.status(403).json("You don't have permission to delete this");
+
+  db.user
+    .delete({ where: { id: parseInt(id) } })
+    .then(async (user: sanitizedUser) => {
+      req.logout();
+      await prisma.post.deleteMany({ where: { userId: null } });
+      res.status(200).json(user);
+    })
+    .catch(_err => {
+      console.log(_err);
+      res.status(400).json('Unable to delete user');
+    });
+});
+/**
  * Updatess a user, only works if logged in and user is themself
  */
 userRoute.put('/:id', isLoggedIn, async (req, res) => {
