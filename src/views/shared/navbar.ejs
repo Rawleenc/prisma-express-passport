@@ -4,10 +4,12 @@
     <li class="nav-item">
       <a class="nav-link" href="/home">Home</a>
     </li>
-    <% if (user) { %>
     <li class="nav-item">
-      <a href="/users/<%= user.id %>/posts" class="nav-link">Your posts</a>
+      <a class="nav-link" href="/posts">Posts</a>
     </li>
-    <% } %>
+    <li class="nav-item">
+      <a class="nav-link" href="/users">Users</a>
+    </li>
+    </p>
   </ul>
 </nav>
