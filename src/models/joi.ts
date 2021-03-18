@@ -11,6 +11,12 @@ export const loginSchema = joi.object().keys({
   password: joi.string().min(6).required(),
 });
 
+export const updateUserSchema = joi.object().keys({
+  email: joi.string().trim().email().optional(),
+  password: joi.string().min(6).optional(),
+  displayName: joi.string().min(3).optional(),
+});
+
 export const postSchema = joi.object().keys({
   title: joi.string().required(),
   content: joi.string().required(),
