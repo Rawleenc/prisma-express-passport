@@ -1,6 +1,6 @@
 import { Post, postTitle } from './post';
 
-export class User {
+export interface User {
   id: number;
   email: string;
   displayName: string | null;
