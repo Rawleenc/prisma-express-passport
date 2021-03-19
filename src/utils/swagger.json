@@ -21,7 +21,78 @@
   ],
   "consumes": ["application/json"],
   "produces": ["application/json"],
+  "components": {
+    "securitySchemes": {
+      "cookieAuth": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "session"
+      }
+    }
+  },
   "paths": {
+    "/login": {
+      "post": {
+        "summary": "Logs in",
+        "tags": ["Auth"],
+        "requestBody": {
+          "required": true,
+          "description": "Logs into a given user. Only reads email & password",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Auth"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "'field' is required"
+          },
+          "404": {
+            "description": "Unable to login"
+          }
+        }
+      }
+    },
+    "/register": {
+      "post": {
+        "summary": "Registers",
+        "tags": ["Auth"],
+        "requestBody": {
+          "required": true,
+          "description": "Registers a user. Only reads email, password and displayName. ",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Auth"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK, redirects to login",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "'field' is required or invalid. (valid email, password, display name)"
+          },
+          "404": {
+            "description": "Unable to register"
+          }
+        }
+      }
+    },
     "/users": {
       "get": {
         "tags": ["Users"],
@@ -60,11 +131,11 @@
         }
       },
       "put": {
-        "summary": "Update User with id",
+        "summary": "Updates a user with id",
         "tags": ["Users"],
         "requestBody": {
           "required": true,
-          "description": "Update a user with a given id. id property in json object will  NOT be read. Only reads email, password, displayName",
+          "description": "Update a user. Only reads email, password and displayName",
           "content": {
             "application/json": {
               "schema": {
@@ -78,7 +149,7 @@
             "in": "path",
             "name": "id",
             "required": true,
-            "description": "Update User with new data",
+            "description": "Update a user with new data",
             "type": "integer"
           }
         ],
@@ -241,6 +312,20 @@
     }
   },
   "definitions": {
+    "Auth": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        }
+      }
+    },
     "User": {
       "type": "object",
       "properties": {
