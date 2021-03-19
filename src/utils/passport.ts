@@ -54,5 +54,5 @@ export const isLoggedIn = (req: Request, res: Response, next: NextFunction) => {
 
   // Consider showing either an error, or simply redirect the user to log in page
   // res.status(401).json('You must be logged in to do this.');
-  res.redirect('/login');
+  res.status(401).redirect('/login');
 };
