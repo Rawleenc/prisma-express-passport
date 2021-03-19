@@ -14,7 +14,15 @@ app.set('view engine', 'ejs');
 
 // Set express to use url encoded extended property. TLDR allows nested objects. & the responses to only be parsed as JSON
 app.use(express.urlencoded({ extended: true }), express.json());
-app.use(session({ secret: process.env.SECRET!, resave: false, saveUninitialized: false }));
+app.use(
+  session({
+    name: 'session',
+    secret: process.env.SECRET!,
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 1000 * 60 * 60 * 24 * 1, sameSite: 'lax' }, // 1 day expiration
+  }),
+);
 app.use(passport.initialize());
 app.use(passport.session());
 
