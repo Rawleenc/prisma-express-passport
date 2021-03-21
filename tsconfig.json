@@ -3,7 +3,7 @@
     "target": "ESNext",
     "module": "CommonJS",
     "lib": ["ESNext.AsyncIterable", "ESNext", "DOM"],
-    "types": ["node"],
+    "types": ["node", "jest"],
     "moduleResolution": "node",
     "outDir": "dist",
     "baseUrl": "./src",
