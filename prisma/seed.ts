@@ -1,6 +1,5 @@
 import { PrismaClient } from '@prisma/client';
 import argon2id from 'argon2';
-import 'dotenv/config';
 
 const prisma = new PrismaClient();
 const basePassword = process.env.BASE_PASSWORD!;
