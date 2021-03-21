@@ -85,3 +85,24 @@ test('Fail on create user, invalid request (no display name)', async () => {
     },
   });
 });
+
+test('Create new user', async () => {
+  const req = {
+    email: 'newuser@newuser.dk',
+    password: process.env.BASE_PASSWORD! + '6',
+    displayName: 'new user',
+  };
+
+  // Redirects to /login after registration. (status 302)
+  await request(app).post(`/register`).send(req).expect(302);
+});
+
+test('Login with newly created user', async () => {
+  const req = {
+    email: 'newuser@newuser.dk',
+    password: process.env.BASE_PASSWORD! + '6',
+  };
+
+  // Redirects to /profile after login. (status 302)
+  await request(app).post(`/login`).send(req).expect(302);
+});
