@@ -8,7 +8,10 @@ import { userSchema } from './../models/joi';
 import { sanitizedUser } from './../models/user';
 
 const userRoute = Router();
+
 const db = prisma;
+
+// Use the file name to decide the type for reference
 const type = path.basename(__filename.split('.')[0]);
 const types = type + 's';
 const types2 = 'posts';
@@ -65,7 +68,7 @@ userRoute.get('/:id', async (req, res) => {
 /**
  * Gets the posts of a specific user if possible
  */
-userRoute.get('/:id/posts', async (req, res) => {
+userRoute.get(`/:id/${types2}`, async (req, res) => {
   const { id } = req.params;
   if (isNaN(parseInt(id))) return res.status(400).json(Responses.invalid_id(type));
 
@@ -103,7 +106,7 @@ userRoute.put('/:id', isLoggedIn, async (req, res) => {
   if (!user) return res.status(404).json(Responses.read.none_found(type));
 
   const { email } = req.user as sanitizedUser;
-  if (user.email !== email) return res.status(403).json(Responses.no_permissions('update'));
+  if (user.email !== email) return res.status(403).json(Responses.no_permissions(Actions.update));
 
   db.user
     .update({
@@ -115,7 +118,7 @@ userRoute.put('/:id', isLoggedIn, async (req, res) => {
       },
     })
     .then(post => res.status(200).json(post))
-    .catch(_err => res.status(400).json(Responses.unable_to_perform('update', type)));
+    .catch(_err => res.status(400).json(Responses.unable_to_perform(Actions.update, type)));
 });
 //#endregion
 

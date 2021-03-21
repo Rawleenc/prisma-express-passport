@@ -9,6 +9,8 @@ import { postSchema } from './../models/joi';
 const postRoute = Router();
 
 const db = prisma;
+
+// Use the file name to decide the type for reference
 const type = path.basename(__filename.split('.')[0]);
 const types = type + 's';
 
@@ -104,6 +106,7 @@ postRoute.put('/:id', isLoggedIn, async (req, res) => {
 //#endregion
 
 //#region DELETE
+
 /**
  * Deletes a post, only works if logged in and user is author of post
  */
