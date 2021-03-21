@@ -10,4 +10,5 @@ export interface User {
   admin: boolean;
 }
 
+export type testUser = Pick<User, 'email' | 'displayName'>;
 export type sanitizedUser = Omit<User, 'id' | 'password' | 'admin'>;
