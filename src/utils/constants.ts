@@ -20,4 +20,17 @@ export enum Actions {
   delete = 'delete',
 }
 
+export enum Routes {
+  users = '/users',
+  posts = '/posts',
+  docs = '/docs',
+}
+
 export const json = /json/;
+
+export const testUser = {
+  email: 'asge0907@easv365.dk',
+  displayName: 'Asger Storm',
+  createdAt: '2021-03-20T21:53:30.903Z',
+  updatedAt: '2021-03-20T21:53:30.903Z',
+};
