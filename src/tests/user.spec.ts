@@ -31,12 +31,57 @@ test(`Return a single ${type}`, async () => {
 
 test('Return error on invalid id', async () => {
   const response = await request(app).get(`/${types}/test`).expect('Content-Type', json).expect(400);
+
   expect(response.body).toBeDefined();
   expect(response.body).toEqual(Responses.invalid_id(type));
 });
 
 test('Return error on non existing id', async () => {
   const response = await request(app).get(`/${types}/420`).expect('Content-Type', json).expect(404);
+
   expect(response.body).toBeDefined();
   expect(response.body).toEqual(Responses.read.none_found(type));
+});
+
+test('Fail on create user, invalid request (password too short)', async () => {
+  const req = {
+    email: 'user@user.dk',
+    password: process.env.BASE_PASSWORD!,
+  };
+
+  console.log(req);
+
+  const response = await request(app).post(`/register`).send(req).expect('Content-Type', json).expect(400);
+
+  expect(response.body).toBeDefined();
+  expect(response.body).toMatchObject({
+    error: {
+      context: { key: 'password', label: 'password', limit: 6, value: '12345' },
+      message: '"password" length must be at least 6 characters long',
+      path: ['password'],
+      type: 'string.min',
+    },
+  });
+});
+
+test('Fail on create user, invalid request (no display name)', async () => {
+  const req = {
+    email: 'user@user.dk',
+    password: process.env.BASE_PASSWORD! + '6',
+  };
+
+  const response = await request(app).post(`/register`).send(req).expect('Content-Type', json).expect(400);
+
+  expect(response.body).toBeDefined();
+  expect(response.body).toMatchObject({
+    error: {
+      message: '"displayName" is required',
+      path: ['displayName'],
+      type: 'any.required',
+      context: {
+        label: 'displayName',
+        key: 'displayName',
+      },
+    },
+  });
 });
