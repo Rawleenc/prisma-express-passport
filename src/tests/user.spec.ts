@@ -8,6 +8,7 @@ import { Responses } from './../utils/constants';
 
 const type = path.basename(__filename.split('.')[0]);
 const types = type + 's';
+const types2 = 'posts';
 
 afterAll(async done => {
   await prisma.$disconnect();
@@ -15,11 +16,27 @@ afterAll(async done => {
   done();
 });
 
-test(`Return list of ${types}, at least 1.`, async () => {
-  const response = await request(app).get('/users').expect('Content-Type', json).expect(200);
+test(`Return list of ${types}`, async () => {
+  const response = await request(app).get(`/${types}`).expect('Content-Type', json).expect(200);
 
   expect(response.body).toBeDefined();
   expect((response.body as sanitizedUser[]).length).toBeGreaterThanOrEqual(1);
+});
+
+test(`Return list of 4 ${types2}`, async () => {
+  const response = await request(app).get(`/${types}/3/${types2}`).expect('Content-Type', json).expect(200);
+
+  console.log(response.body);
+
+  expect(response.body).toBeDefined();
+  expect((response.body as sanitizedUser[]).length).toBeGreaterThanOrEqual(1);
+});
+
+test(`Return empty list of ${types2} for non existant user`, async () => {
+  const response = await request(app).get(`/${types}/4/${types2}`).expect('Content-Type', json).expect(200);
+
+  expect(response.body).toBeDefined();
+  expect((response.body as sanitizedUser[]).length).toEqual(0);
 });
 
 test(`Return a single ${type}`, async () => {
@@ -48,8 +65,6 @@ test('Fail on create user, invalid request (password too short)', async () => {
     email: 'user@user.dk',
     password: process.env.BASE_PASSWORD!,
   };
-
-  console.log(req);
 
   const response = await request(app).post(`/register`).send(req).expect('Content-Type', json).expect(400);
 
