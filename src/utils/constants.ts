@@ -1,3 +1,5 @@
+import { testUser } from '../models/user';
+
 export const Responses = {
   register: {
     email_taken: 'That email is already registered',
@@ -28,9 +30,7 @@ export enum Routes {
 
 export const json = /json/;
 
-export const testUser = {
+export const user: testUser = {
   email: 'asge0907@easv365.dk',
   displayName: 'Asger Storm',
-  createdAt: '2021-03-20T21:53:30.903Z',
-  updatedAt: '2021-03-20T21:53:30.903Z',
 };
