@@ -57,6 +57,7 @@ postRoute.get('/', async (_req, res) => {
  */
 postRoute.get('/:id', async (req, res) => {
   const { id } = req.params;
+  if (isNaN(parseInt(id))) return res.status(400).json(Responses.invalid_id(type));
 
   // imitate sanitizedPost by only selecting the displayName from the author on the post.
   const post = await db.post.findUnique({
@@ -80,6 +81,7 @@ postRoute.get('/:id', async (req, res) => {
  */
 postRoute.put('/:id', isLoggedIn, async (req, res) => {
   const { id } = req.params;
+  if (isNaN(parseInt(id))) return res.status(400).json(Responses.invalid_id(type));
 
   const { error } = postSchema.validate(req.body);
   if (error) return res.status(400).json({ error: error.details[0] });
@@ -112,6 +114,7 @@ postRoute.put('/:id', isLoggedIn, async (req, res) => {
  */
 postRoute.delete('/:id', isLoggedIn, async (req, res) => {
   const { id } = req.params;
+  if (isNaN(parseInt(id))) return res.status(400).json(Responses.invalid_id(type));
 
   const post = await db.post.findUnique({ where: { id: parseInt(id) }, include: { author: true } });
   if (!post) return res.status(404).json(Responses.read.none_found(type));
