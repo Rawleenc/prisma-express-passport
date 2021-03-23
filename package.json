@@ -4,6 +4,7 @@
   "description": "A simple RESTful API, utilizing Express with Prisma",
   "main": "index.js",
   "scripts": {
+    "build": "tsc",
     "start": "ts-node src/index.ts",
     "p:check": "prettier --check ./**/*.{js,json,ts}",
     "p:write": "prettier --write ./**/*.{js,json,ts}",
@@ -26,6 +27,7 @@
   "dependencies": {
     "@prisma/client": "^2.19.0",
     "argon2": "^0.27.1",
+    "dotenv": "^8.2.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "express-session": "^1.17.1",

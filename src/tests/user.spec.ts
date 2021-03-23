@@ -1,10 +1,9 @@
 import path from 'path';
 import request from 'supertest';
 import { app, server } from '../index';
-import { json, user } from '../utils/constants';
+import { sanitizedUser } from '../models/user';
+import { json, Responses, user } from '../utils/constants';
 import prisma from '../utils/db';
-import { sanitizedUser } from './../models/user';
-import { Responses } from './../utils/constants';
 
 const type = path.basename(__filename.split('.')[0]);
 const types = type + 's';
@@ -25,8 +24,6 @@ test(`Return list of ${types}`, async () => {
 
 test(`Return list of 4 ${types2}`, async () => {
   const response = await request(app).get(`/${types}/3/${types2}`).expect('Content-Type', json).expect(200);
-
-  console.log(response.body);
 
   expect(response.body).toBeDefined();
   expect((response.body as sanitizedUser[]).length).toBeGreaterThanOrEqual(1);
