@@ -10,4 +10,5 @@ export interface Post {
   updatedAt: Date;
 }
 
+export type testPost = Pick<Post, 'title' | 'content'>;
 export type postTitle = Pick<Post, 'title'>;

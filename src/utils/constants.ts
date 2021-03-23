@@ -1,4 +1,5 @@
 import { testUser } from '../models/user';
+import { testPost } from './../models/post';
 
 export const Responses = {
   register: {
@@ -33,4 +34,10 @@ export const json = /json/;
 export const user: testUser = {
   email: 'asge0907@easv365.dk',
   displayName: 'Asger Storm',
+};
+
+export const post: testPost = {
+  title: 'Vestibulum blandit ligula et eros tincidunt',
+  content:
+    'Sed eget felis et tortor scelerisque convallis non non turpis. In id sollicitudin lectus, quis euismod enim. Curabitur sagittis, felis eu porta facilisis, turpis quam aliquet enim, vel tincidunt mauris neque ac nisl. Aliquam eu porta mauris. Ut a ultrices diam',
 };
