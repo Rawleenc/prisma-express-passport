@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express';
 import session from 'express-session';
 import passport from 'passport';
@@ -35,6 +36,6 @@ app.use(Routes.posts, postRoute);
 // Swagger
 app.use(Routes.docs, swaggerUi.serve, swaggerUi.setup(swaggerDef, { explorer: true }));
 
-export const server = app.listen(process.env.PORT, () => {
-  console.log(`Server ready & listening to http://localhost:${process.env.PORT}`);
+export const server = app.listen(`${process.env.PORT ?? 3000}`, () => {
+  console.log(`Server ready & listening to http://localhost:${process.env.PORT || 3000}`);
 });
