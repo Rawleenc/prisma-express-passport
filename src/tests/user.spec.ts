@@ -19,14 +19,14 @@ test(`Return list of ${types}`, async () => {
   const response = await request(app).get(`/${types}`).expect('Content-Type', json).expect(200);
 
   expect(response.body).toBeDefined();
-  expect((response.body as sanitizedUser[]).length).toBeGreaterThanOrEqual(1);
+  expect((response.body as sanitizedUser[]).length).toEqual(3);
 });
 
 test(`Return list of 4 ${types2}`, async () => {
   const response = await request(app).get(`/${types}/3/${types2}`).expect('Content-Type', json).expect(200);
 
   expect(response.body).toBeDefined();
-  expect((response.body as sanitizedUser[]).length).toBeGreaterThanOrEqual(1);
+  expect((response.body as sanitizedUser[]).length).toEqual(4);
 });
 
 test(`Return empty list of ${types2} for non existant user`, async () => {
