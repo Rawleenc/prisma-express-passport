@@ -37,8 +37,14 @@ startRoute.get('/profile', isLoggedIn, (req, res) => {
 
 //#endregion
 
+/**
+ * Requests a login, will authenticate with Passport (utils/passport) - redirects on success or failure
+ */
 startRoute.post('/login', passport.authenticate('local', { failureRedirect: '/login', successRedirect: '/profile' }));
 
+/**
+ * Logs out the user, cannot possibly fail. IGN rates 10/10
+ */
 startRoute.get('/logout', (req, res) => {
   req.logout();
   res.redirect('/');

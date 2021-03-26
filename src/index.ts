@@ -6,8 +6,10 @@ import swaggerUi from 'swagger-ui-express';
 import startRoute from './routes';
 import postRoute from './routes/post';
 import userRoute from './routes/user';
+import { Routes } from './utils/constants';
 import * as swaggerDef from './utils/swagger.json';
-const app = express();
+
+export const app = express();
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
@@ -28,13 +30,12 @@ app.use(passport.session());
 
 // Routes
 app.use('', startRoute);
-app.use('/users', userRoute);
-app.use('/posts', postRoute);
+app.use(Routes.users, userRoute);
+app.use(Routes.posts, postRoute);
 
 // Swagger
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDef, { explorer: true }));
+app.use(Routes.docs, swaggerUi.serve, swaggerUi.setup(swaggerDef, { explorer: true }));
 
-const server = app.listen(process.env.PORT, () => {
-  console.log('Server ready & listening to http://localhost:' + process.env.PORT);
-  console.log('keep alive timeout: ', server.keepAliveTimeout);
+export const server = app.listen(`${process.env.PORT ?? 3000}`, () => {
+  console.log(`Server ready & listening to http://localhost:${process.env.PORT || 3000}`);
 });
