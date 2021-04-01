@@ -3,9 +3,9 @@ FROM node:14-alpine AS builder
 # Create app directory
 WORKDIR /app
 
-# Copy over dependencies
+# Copy dependencies
 COPY package.json ./
-# Copy in prisma since it's not 
+# Copy in prisma
 COPY prisma ./prisma/
 
 # Install app dependencies
