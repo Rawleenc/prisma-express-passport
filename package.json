@@ -10,6 +10,10 @@
     "p:write": "prettier --write ./**/*.{js,json,ts}",
     "seed": "prisma db seed --preview-feature",
     "migrate": "prisma migrate dev --preview-feature",
+    "docker:build": "docker build -t rest-api .",
+    "docker:run": "docker run -d --name Restful-API -p 3000:3000 --env-file .env rest-api yarn start",
+    "docker-compose:test": "docker-compose -f docker-compose.test.yml run server",
+    "docker-compose:dev": "docker-compose run server",
     "dev": "ts-node-dev src/index.ts",
     "test": "jest"
   },

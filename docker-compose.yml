@@ -10,6 +10,7 @@ services:
     #   - postgres
     networks:
       - dev_vm
+    command: yarn start
 
   # postgres:
   #   image: postgres:13-alpine
