@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('./shared/bootstrap'); %>
+  </head>
+  <body>
+    <%- include('./shared/navbar'); %>
+
+    <div class="container">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">ID: <%= user.id %></h5>
+
+          <h6 class="card-subtitle mb-2 text-muted">Name: <%= user.displayName %></h6>
+
+          <p class="card-text">
+            Admin: <%= user.admin ? 'yes' : 'no' %><br />
+            Email: <%= user.email %><br />
+          </p>
+
+          <div class="d-flex justify-content-between">
+            <a href="/logout" class="card-link btn btn-outline-danger">Click here to log out</a>
+            <a href="/users/<%= user.id %>/posts" class="card-link btn btn-outline-info"
+              >Click here to see your posts</a
+            >
+            <a href="/create-post" class="card-link btn btn-success">Add post</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%- include('./shared/scripts'); %>
+  </body>
+</html>

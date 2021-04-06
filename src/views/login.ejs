@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('./shared/bootstrap'); %>
+  </head>
+
+  <body>
+    <%- include('./shared/navbar'); %>
+
+    <div class="container">
+      <form class="form-group mt-4" action="/login" method="post">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" name="email" class="form-control" placeholder="Enter your email" />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" />
+        </div>
+
+        <div class="d-flex justify-content-between">
+          <a href="/home" class="card-link btn btn-outline-info">Click here to go back</a>
+          <button type="submit" class="btn btn-primary">Sign in</button>
+        </div>
+      </form>
+    </div>
+
+    <%- include('./shared/scripts'); %>
+  </body>
+</html>

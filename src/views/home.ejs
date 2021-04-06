@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('./shared/bootstrap'); %>
+  </head>
+
+  <body>
+    <%- include('./shared/navbar'); %>
+
+    <div class="container">
+      <div class="jumbotron mt-4">
+        <p>
+          Hello and welcome. This API is built up of the following: Users and Posts. <br /><br />
+          You can query users on "/users" and posts on "/posts"<br /><br />
+          can also get posts belonging to a user by using "/users/[id]/posts"<br /><br />
+          Enjoy and have fun!
+        </p>
+      </div>
+
+      <% if (!user) { %>
+      <div class="d-flex justify-content-between">
+        <a class="btn btn-info active" href="/register">Click here to register</a>
+        <a class="btn btn-primary active" href="/login">Click here to log in</a>
+      </div>
+      <% } else { %>
+      <p>
+        Hello there, <%= user.displayName ?? 'User' %> <br /><br />
+
+        <a class="btn btn-primary active" href="/profile">Click here to see your profile</a>. <% } %>
+      </p>
+    </div>
+    <%- include('./shared/scripts'); %>
+  </body>
+</html>
