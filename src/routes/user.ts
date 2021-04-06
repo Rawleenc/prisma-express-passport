@@ -84,7 +84,7 @@ userRoute.get(`/:id/${types2}`, async (req, res) => {
     },
   });
 
-  if (!posts) return res.status(404).json(Responses.read.none_found(types2));
+  if (!posts.length) return res.status(404).json(Responses.read.none_found(types2));
 
   res.json(posts);
 });
