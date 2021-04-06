@@ -30,10 +30,10 @@ test(`Return list of 4 ${types2}`, async () => {
 });
 
 test(`Return empty list of ${types2} for non existant user`, async () => {
-  const response = await request(app).get(`/${types}/4/${types2}`).expect('Content-Type', json).expect(200);
+  const response = await request(app).get(`/${types}/420/${types2}`).expect('Content-Type', json).expect(404);
 
   expect(response.body).toBeDefined();
-  expect((response.body as sanitizedUser[]).length).toEqual(0);
+  expect(response.body).toEqual(Responses.read.none_found(types2));
 });
 
 test(`Return a single ${type}`, async () => {
