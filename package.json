@@ -11,9 +11,10 @@
     "seed": "prisma db seed --preview-feature",
     "migrate": "prisma migrate dev --preview-feature",
     "docker:build": "docker build -t rest-api .",
-    "docker:run": "docker run -d --name Restful-API -p 3000:3000 --env-file .env rest-api yarn start",
-    "docker-compose:test": "docker-compose -f docker-compose.test.yml run server",
+    "docker:dev": "docker run -d --rm --name Restful-API -p 3000:3000 --env-file .env rest-api yarn start",
+    "docker:test": "docker run -d --rm --name Restful-API -p 3000:3000 --env-file .env rest-api yarn test -i",
     "docker-compose:dev": "docker-compose run server",
+    "docker-compose:test": "docker-compose -f docker-compose.test.yml run server",
     "dev": "ts-node-dev src/index.ts",
     "test": "jest"
   },
