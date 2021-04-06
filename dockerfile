@@ -13,5 +13,7 @@ RUN yarn install --frozen-lockfile
 # Generate prisma client (requires prisma folder)
 RUN yarn prisma generate
 
-# Copy source and destination 
+# Copy from local files (PC) to WORKDIR in base image
 COPY . .
+
+EXPOSE 3000
