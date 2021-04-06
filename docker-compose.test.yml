@@ -9,7 +9,7 @@ services:
     # depends_on:
     #   - postgres
     networks:
-      - dev_vm
+      - test_vm
     command: yarn test -i
 
   # postgres:
@@ -23,10 +23,10 @@ services:
   #   volumes:
   #     - postgres:/var/lib/postgresql/data
   #   networks:
-  #     - dev_vm
+  #     - test_vm
 
 networks:
-  dev_vm:
+  test_vm:
 # volumes:
 #   postgres:
 #     name: postgres
