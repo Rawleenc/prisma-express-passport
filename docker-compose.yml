@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.8'
 services:
   restapi:
     build: '.'
@@ -6,7 +6,3 @@ services:
       - .env
     ports:
       - 3000:3000
-    command: yarn start
-
-networks:
-  dev_vm:
