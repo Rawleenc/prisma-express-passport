@@ -2,8 +2,7 @@ name: Release (docker hub)
 
 on:
   push:
-    tags:
-      - '*.*.*'
+    branches: [release]
 
   workflow_dispatch:
 

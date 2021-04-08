@@ -66,3 +66,17 @@ or if you use yarn
 ```
          yarn dev
 ```
+
+**Optional Steps**
+
+test the application (Testing the application with Jest)
+
+```
+        npm run test
+```
+
+or if you use yarn
+
+```
+         yarn test
+```
