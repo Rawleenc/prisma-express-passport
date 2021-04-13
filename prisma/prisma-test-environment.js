@@ -3,10 +3,10 @@ const fs = require('fs');
 const util = require('util');
 const NodeEnvironment = require('jest-environment-node');
 const exec = util.promisify(require('child_process').exec);
-
+const { ProjectConfig } = require('@jest/types/build/Config');
 class PrismaTestEnvironment extends NodeEnvironment {
   /**
-   * @param {import("@jest/types/build/Config").ProjectConfig} config
+   * @param {ProjectConfig} config
    */
   constructor(config) {
     super(config);
@@ -20,8 +20,8 @@ class PrismaTestEnvironment extends NodeEnvironment {
 
   async setup() {
     // Run the migrations to ensure our schema has the required structure
-    await exec(`yarn migrate`);
-    await exec(`yarn seed`);
+    await exec('yarn migrate --name test');
+    await exec('yarn seed');
 
     return super.setup();
   }
