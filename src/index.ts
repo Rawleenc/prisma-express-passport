@@ -11,7 +11,7 @@ import * as swaggerDef from './utils/swagger.json';
 
 export const app = express();
 
-app.set('views', __dirname + '/views');
+app.set('views', `${__dirname}/../views`);
 app.set('view engine', 'ejs');
 
 // Set express to use url encoded extended property. TLDR allows nested objects. & the responses to only be parsed as JSON
