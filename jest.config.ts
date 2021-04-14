@@ -142,7 +142,7 @@ export default {
 
   // The test environment that will be used for testing
   // testEnvironment: "node",
-  testEnvironment: path.join(__dirname, 'prisma', 'prisma-test-environment.js'),
+  testEnvironment: path.join(__dirname, 'src', 'prisma', 'prisma-test-environment.js'),
 
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},
