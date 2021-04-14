@@ -4,7 +4,8 @@
   "description": "A simple RESTful API, utilizing Express with Prisma",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "tsc": "tsc",
+    "build": "prisma generate",
     "start": "node dist/index.js",
     "p:check": "prettier --check ./**/*.{js,json,ts}",
     "p:write": "prettier --write ./**/*.{js,json,ts}",
