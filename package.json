@@ -27,9 +27,6 @@
     "url": "https://github.com/dankphetamine/prisma-express-passport/issues"
   },
   "homepage": "https://github.com/dankphetamine/prisma-express-passport#readme",
-  "prisma": {
-    "schema": "./src/prisma/schema.prisma"
-  },
   "dependencies": {
     "@prisma/client": "^2.19.0",
     "@sentry/node": "^6.2.5",
