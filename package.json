@@ -14,7 +14,7 @@
     "docker:build": "docker build -t rest-api:latest .",
     "docker:run": "docker run --rm --name Restful-API -p 3000:3000 --env-file .env rest-api yarn start",
     "dev": "ts-node-dev src/index.ts",
-    "test": "jest"
+    "test": "jest -i"
   },
   "repository": {
     "type": "git",
