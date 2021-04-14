@@ -5,6 +5,8 @@ const NodeEnvironment = require('jest-environment-node');
 const exec = util.promisify(require('child_process').exec);
 const { ProjectConfig } = require('@jest/types/build/Config');
 class PrismaTestEnvironment extends NodeEnvironment {
+  dbName;
+  dbPath;
   /**
    * @param {ProjectConfig} config
    */
