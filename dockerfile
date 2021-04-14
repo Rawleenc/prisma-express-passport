@@ -5,11 +5,10 @@ WORKDIR /app
 
 # Copy dependencies
 COPY package.json ./
-# Copy prisma
-COPY prisma ./prisma/
 
 # Install app dependencies (reuqires package.json)
 RUN yarn install --frozen-lockfile
+
 # Generate prisma client (requires prisma folder)
 RUN yarn prisma generate
 
