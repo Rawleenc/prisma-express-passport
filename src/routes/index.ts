@@ -75,10 +75,4 @@ startRoute.post('/register', async (req, res) => {
 });
 //#endregion
 
-//#region Sentry
-startRoute.get('/debug-sentry', function mainHandler(_req, _res) {
-  throw new Error('My first Sentry error!');
-});
-//#endregion
-
 export default startRoute;
