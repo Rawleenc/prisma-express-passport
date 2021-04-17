@@ -6,8 +6,6 @@
     "types": ["node", "jest"],
     "moduleResolution": "node",
     "outDir": "dist",
-    "baseUrl": "./src",
-    "rootDir": "src",
     "strict": true,
     "alwaysStrict": true,
     "strictPropertyInitialization": false,
