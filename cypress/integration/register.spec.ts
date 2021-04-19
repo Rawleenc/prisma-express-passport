@@ -45,17 +45,17 @@ describe('Tests for Register', () => {
   });
 
   // TODO reimplement
-  // it('Register succesfully', () => {
-  //   cy.fixture('user').then((user: { email: string; password: string; displayName: string }) => {
-  //     cy.get(':nth-child(1) > .form-control').type(user.email);
-  //     cy.get(':nth-child(2) > .form-control').type(user.password);
-  //     cy.get(':nth-child(3) > .form-control').type(user.displayName);
+  it('Register succesfully', () => {
+    cy.fixture('user').then((user: { email: string; password: string; displayName: string }) => {
+      cy.get(':nth-child(1) > .form-control').type(user.email);
+      cy.get(':nth-child(2) > .form-control').type(user.password);
+      cy.get(':nth-child(3) > .form-control').type(user.displayName);
 
-  //     cy.get('.btn-primary').click();
+      cy.get('.btn-primary').click();
 
-  //     cy.url().should('include', 'login');
-  //   });
-  // });
+      cy.url().should('include', 'login');
+    });
+  });
 
   it('Fail to register with the same user twice', () => {
     cy.fixture('user').then((user: { email: string; password: string; displayName: string }) => {
