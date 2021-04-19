@@ -42,9 +42,9 @@ jobs:
 
       - run: yarn migrate
 
-      - run: yarn seed
+      - run: yarn reset
 
-      - run: yarn test -i
+      - run: yarn jest
 
       - name: Cypress run
         uses: cypress-io/github-action@v2

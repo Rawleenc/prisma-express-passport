@@ -9,7 +9,7 @@
     "start": "ts-node src/index.ts",
     "p:check": "prettier --check ./**/*.{js,json,ts}",
     "p:write": "prettier --write ./**/*.{js,json,ts}",
-    "seed": "prisma migrate reset --force",
+    "reset": "prisma migrate reset --force",
     "migrate": "prisma migrate dev --preview-feature",
     "docker:build": "docker build -t rest-api:latest .",
     "docker:run": "docker-compose up",

@@ -42,13 +42,13 @@ This will install the necessary prisma related stuff
 Seed the database (Add data)
 
 ```
-        npm run seed
+        npm run reset
 ```
 
 or if you use yarn
 
 ```
-        yarn seed
+        yarn reset
 ```
 
 This will add the initial test-able data to the database, allowing for querying on it.
