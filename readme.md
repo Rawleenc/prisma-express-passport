@@ -4,8 +4,8 @@ To selfhost you will need the following:
 
 - [nodejs](https://nodejs.org)
 - a node package manager like npm or yarn
-- [npm](https://www.npmjs.com/)
-- [yarn](https://yarnpkg.com/)
+  [npm](https://www.npmjs.com/)
+  [yarn](https://yarnpkg.com/)
 
 **Step 1**
 
