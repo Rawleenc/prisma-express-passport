@@ -25,6 +25,7 @@ app.use(
     cookie: { maxAge: 1000 * 60 * 60 * 24 * 1, sameSite: 'lax' }, // 1 day expiration
   }),
 );
+
 app.use(passport.initialize());
 app.use(passport.session());
 

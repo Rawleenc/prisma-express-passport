@@ -39,7 +39,7 @@ This will install the necessary prisma related stuff
 
 **Step 3**
 
-Seed the database (Add data)
+Resets the db to latest migration and seeds (Adds default testing data)
 
 ```
         npm run reset
@@ -72,11 +72,25 @@ or if you use yarn
 test the application (Testing the application with Jest)
 
 ```
-        npm run test
+        npm run jest
 ```
 
 or if you use yarn
 
 ```
-         yarn test
+         yarn jest
+```
+
+E2E test the application (Testing the application with Cypress)
+Note for this the app has to be running, so refer to `Step 4` before running this.
+If running more than once, remember to reset the database so the `Register` test doesn't fail.
+
+```
+        npm run cypress
+```
+
+or if you use yarn
+
+```
+         yarn cypress
 ```

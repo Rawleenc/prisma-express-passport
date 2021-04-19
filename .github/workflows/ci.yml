@@ -40,8 +40,6 @@ jobs:
 
       - run: yarn install
 
-      - run: yarn migrate
-
       - run: yarn reset
 
       - run: yarn jest
