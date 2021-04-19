@@ -9,13 +9,14 @@
     "start": "ts-node src/index.ts",
     "p:check": "prettier --check ./**/*.{js,json,ts}",
     "p:write": "prettier --write ./**/*.{js,json,ts}",
-    "seed": "prisma db seed --preview-feature",
+    "seed": "prisma migrate reset --force",
     "migrate": "prisma migrate dev --preview-feature",
     "docker:build": "docker build -t rest-api:latest .",
     "docker:run": "docker-compose up",
     "docker:test": "docker-compose -f docker-compose.test.yml up",
     "dev": "ts-node-dev src/index.ts",
-    "test": "jest -i"
+    "jest": "jest -i",
+    "cypress": "cypress open"
   },
   "keywords": [],
   "author": "",
