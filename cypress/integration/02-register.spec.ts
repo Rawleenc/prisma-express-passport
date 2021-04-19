@@ -1,4 +1,4 @@
-import { Responses } from './../../src/utils/constants';
+import { Responses } from '../../src/utils/constants';
 
 describe('Tests for Register', () => {
   beforeEach(() => {
@@ -21,21 +21,10 @@ describe('Tests for Register', () => {
     cy.get('.btn-primary').contains('Sign up');
   });
 
-  it('Fail to register without email', () => {
-    cy.fixture('user').then((user: { email: string; password: string; displayName: string }) => {
-      cy.get(':nth-child(2) > .form-control').type(user.password);
-      cy.get(':nth-child(3) > .form-control').type(user.displayName);
-
-      cy.get('.btn-primary').click();
-
-      cy.get('pre').contains('not allowed to be empty');
-    });
-  });
-
   it('Fail to register with password too short', () => {
     cy.fixture('user').then((user: { email: string; password: string; displayName: string }) => {
       cy.get(':nth-child(1) > .form-control').type(user.email);
-      cy.get(':nth-child(2) > .form-control').type('12345');
+      cy.get(':nth-child(2) > .form-control').type(user.password.toString().slice(0, 1));
       cy.get(':nth-child(3) > .form-control').type(user.displayName);
 
       cy.get('.btn-primary').click();

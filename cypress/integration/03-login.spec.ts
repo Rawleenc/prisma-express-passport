@@ -25,7 +25,7 @@ describe('Tests for Login', () => {
 
       cy.get('.btn-primary').click();
 
-      cy.get('pre').contains('not allowed to be empty');
+      cy.get('.form-group').should('be.visible');
     });
   });
 
@@ -46,11 +46,10 @@ describe('Tests for Login', () => {
     cy.fixture('user').then((user: { email: string; password: string; displayName: string }) => {
       cy.get(':nth-child(1) > .form-control').type(user.email);
       cy.get(':nth-child(2) > .form-control').type(user.password);
-      cy.get(':nth-child(3) > .form-control').type(user.displayName);
 
       cy.get('.btn-primary').click();
 
-      cy.url().should('include', 'login');
+      cy.url().should('include', 'profile');
     });
   });
 });
