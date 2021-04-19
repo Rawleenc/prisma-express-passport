@@ -22,8 +22,7 @@ class PrismaTestEnvironment extends NodeEnvironment {
 
   async setup() {
     // Run the migrations to ensure our schema has the required structure
-    await exec('yarn migrate --name test');
-    await exec('yarn seed');
+    await exec('yarn reset');
 
     return super.setup();
   }
